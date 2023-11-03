@@ -39,7 +39,7 @@ public class login extends JFrame{
 
 
 
-                    String selectQuery = "SELECT * FROM deneme.admins WHERE nameAdmin = ? AND passwordAdmin = ?";
+                    String selectQuery = "SELECT * FROM dormitory.admins WHERE adminName = ? AND adminPassword = ?";
                     PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
                     selectStatement.setString(1, kullaniciAdi);
                     selectStatement.setString(2, sifre);

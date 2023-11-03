@@ -32,19 +32,19 @@ public class adminPage extends JFrame  {
 
     DefaultTableModel StudentDataModel() {
         Object[][] data = {};
-        String[] columnNames = {"ID", "ogr_no", "ogr_ad", "ogr_soyad"};
+        String[] columnNames = {"stu_id", "stu_no", "stu_name", "stu_surname"};
         DefaultTableModel StudentModel = new DefaultTableModel(data, columnNames);
         StudentModel.setColumnIdentifiers(columnNames);
         try {
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:1812/deneme","root","240718");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/dormitory","root","240718");
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM deneme.ogrenci ");
+            ResultSet result = statement.executeQuery("SELECT * FROM dormitory.students ");
             while (result.next()) {
-                int id = result.getInt("ID");
-                String ogr_no = result.getString("ogr_no");
-                String ogr_ad = result.getString("ogr_ad");
-                String ogr_soyad = result.getString("ogr_soyad");
-                Object[] rowData = {id, ogr_no, ogr_ad, ogr_soyad};
+                int stu_id = result.getInt("stu_id");
+                String stu_no = result.getString("stu_no");
+                String stu_name = result.getString("stu_name");
+                String stu_surname = result.getString("stu_surname");
+                Object[] rowData = {stu_id, stu_no, stu_name, stu_surname};
                 StudentModel.addRow(rowData);
 
             }
@@ -59,11 +59,11 @@ public class adminPage extends JFrame  {
         try {
 //    Class.forName("com.mysql.jdbc.Driver");
             //connection to database
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:1812/deneme","root","240718");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/dormitory","root","240718");
             //create statement
             myStmt = connection.createStatement();
             //execute sql query
-            myRs = myStmt.executeQuery("select * from deneme.ogrenci");
+            myRs = myStmt.executeQuery("select * from dormitory.students");
             ResultSetMetaData stData = myRs.getMetaData();
 
             ColumnCount = stData.getColumnCount();
@@ -81,13 +81,13 @@ public class adminPage extends JFrame  {
                 Vector columnData = new Vector();
 
                 for (i = 1; i <= ColumnCount; i++) {
-                    columnData.add(myRs.getString("ID"));
-                    columnData.add(myRs.getString("ogr_no"));
-                    columnData.add(myRs.getString("ogr_ad"));
-                    columnData.add(myRs.getString("ogr_soyad"));
+                    columnData.add(myRs.getString("stu_id"));
+                    columnData.add(myRs.getString("stu_no"));
+                    columnData.add(myRs.getString("stu_name"));
+                    columnData.add(myRs.getString("stu_surname"));
                 }
                 RecordTable.addRow(columnData);
-                //System.out.println(myRs.getString("ID") + " , " + myRs.getString("ogr_no") + " , " + myRs.getString("ogr_ad") + " , " + myRs.getString("ogr_soyad"));
+                //System.out.println(myRs.getString("stu_id") + " , " + myRs.getString("stu_no") + " , " + myRs.getString("stu_name") + " , " + myRs.getString("stu_surname"));
             }
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -118,15 +118,15 @@ public class adminPage extends JFrame  {
                         connection=helper.getConnection();
                         statement=connection.createStatement();
 
-                        String ogr_no = textField1.getText();
-                        String ogr_ad = textField2.getText();
-                        String ogr_soyad = textField3.getText();
+                        String stu_no = textField1.getText();
+                        String stu_name = textField2.getText();
+                        String stu_surname = textField3.getText();
 
 
-                        PreparedStatement ps=connection.prepareStatement("INSERT INTO deneme.ogrenci (ogr_no,ogr_ad,ogr_soyad) VALUES (?,?,?);");
-                        ps.setString(1, ogr_no);
-                        ps.setString(2,ogr_ad);
-                        ps.setString(3,ogr_soyad);
+                        PreparedStatement ps=connection.prepareStatement("INSERT INTO dormitory.students (stu_no,stu_name,stu_surname) VALUES (?,?,?);");
+                        ps.setString(1, stu_no);
+                        ps.setString(2,stu_name);
+                        ps.setString(3,stu_surname);
 
                         ps.executeUpdate();
 
@@ -156,9 +156,9 @@ public class adminPage extends JFrame  {
 
                     Class.forName("com.mysql.jdbc.Driver");
                     //connection to database
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:1812/deneme","root","240718");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dormitory","root","240718");
 
-                    PreparedStatement ps = connection.prepareStatement("delete from deneme.ogrenci  where ogr_no=?");
+                    PreparedStatement ps = connection.prepareStatement("delete from dormitory.students  where stu_no=?");
 
                     ps.setString(1, number);
                     ps.executeUpdate();
