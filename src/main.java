@@ -9,7 +9,7 @@ public class main {
 
         login.setVisible(true);
         login.setTitle("Dormitory Management System");
-        login.setSize(400,300);
+        login.setSize(700,400);
 
         login.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
