@@ -27,13 +27,18 @@ public class adminPage extends JFrame  {
     int ColumnCount,i;
     private JTable table1;
     private JMenuBar menuBar1;
-    private JMenu menu2;
-    private JMenu menu1;
+    private JMenu optionsMenu;
+    private JMenu helpMenu;
     private JButton updateButton;
     private JButton resetButton;
     private JTextField textField4;
     private JMenuItem exitItem;
     private JMenuItem Foods;
+    private JMenu editMenu;
+    private JMenuItem employeeEditMenuItem;
+    private JMenuItem foodEditMenuItem;
+    private JMenuItem roomEditMenuItem;
+    private JMenuItem themeItem;
 
 
     DefaultTableModel StudentDataModel() {
@@ -147,6 +152,36 @@ public class adminPage extends JFrame  {
                 }
 
 
+            }
+        });
+
+        employeeEditMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                employeeEdit employeeEdit=new employeeEdit();
+                employeeEdit.setVisible(true);
+                employeeEdit.setSize(900,600);
+                employeeEdit.setTitle("Employee Edit Page");
+            }
+        });
+
+        roomEditMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                roomEdit roomEdit=new roomEdit();
+                roomEdit.setVisible(true);
+                roomEdit.setSize(900,600);
+                roomEdit.setTitle("Room Edit Page");
+            }
+        });
+
+        foodEditMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                foodEdit foodEdit=new foodEdit();
+                foodEdit.setVisible(true);
+                foodEdit.setSize(900,600);
+                foodEdit.setTitle("Food Edit Page");
             }
         });
 
